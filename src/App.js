@@ -2,16 +2,20 @@ import './App.css';
 import React, { Component } from 'react'
 import { NavBar } from './Header'
 import { Footer } from './Footer'
-import ApiData from './Products'
+import Products from './Components/Products/Products'
+import { Provider } from 'react-redux';
+import store from './Redux/Store/Index';
+
 
 class App extends Component {
   render() {
+
     return (
-      <div>
+      <Provider store={store()}>
       <NavBar/>
-      <ApiData />
+      <Products />
       <Footer/>
-      </div>
+      </Provider>
     );
   }
 }

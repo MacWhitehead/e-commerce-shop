@@ -7,15 +7,18 @@ import { Provider } from 'react-redux';
 import store from './Redux/Store/Index';
 
 
+
 class App extends Component {
   render() {
 
     return (
+      <>
       <Provider store={store()}>
       <NavBar/>
       <Products />
       <Footer/>
       </Provider>
+      </>
     );
   }
 }

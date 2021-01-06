@@ -2,6 +2,7 @@ import React, { Component, useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { productsFetchData } from "../../Redux/Actions/Index";
 import PopulateProducts from "./Product";
+import { Link } from "react-router-dom";
 
 function Products() {
   useEffect(() => {
@@ -18,7 +19,7 @@ function Products() {
     setProducts(products);
     setCurrentProduct(products);
   };
-  
+
   const onCategoryChange = (value) => {
     if (value === "all") {
       setCurrentProduct(products);
@@ -34,35 +35,39 @@ function Products() {
   let productList = () => {
     if (productsToRender.length) {
       return productsToRender.map((product) => {
-        return <PopulateProducts key={product.id} product={product} />;
+        return (
+          <Link to={`products/${product.id}`}>
+            <PopulateProducts key={product.id} product={product} />
+          </Link>
+        );
       });
     } else {
       return "LOADING...";
     }
   };
   const FilteredProducts = () => {
-      return (
-    <select
-      name="categories"
-      onChange={(e) => onCategoryChange(e.target.value)}
-    >
-      <option value="all">All Items</option>
-      <option value="headphones">Headphones</option>
-      <option value="phone">Phone</option>
-      <option value="tv">Television</option>
-      <option value="small-appliance">Small Appliance</option>
-      <option value="refrigerator">Refrigerator</option>
-      <option value="watch">Watch</option>
-      <option value="action-camera">Action-Camera</option>
-    </select>
-      );
+    return (
+      <select
+        name="categories"
+        onChange={(e) => onCategoryChange(e.target.value)}
+      >
+        <option value="all">All Items</option>
+        <option value="headphones">Headphones</option>
+        <option value="phone">Phone</option>
+        <option value="tv">Television</option>
+        <option value="small-appliance">Small Appliance</option>
+        <option value="refrigerator">Refrigerator</option>
+        <option value="watch">Watch</option>
+        <option value="action-camera">Action-Camera</option>
+      </select>
+    );
   };
-  return ( 
-  <>
+  return (
+    <>
       <FilteredProducts />
       {productList()}
-  </>
-  )
+    </>
+  );
 }
 
 // class Products extends Component {

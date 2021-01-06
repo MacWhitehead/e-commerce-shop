@@ -4,21 +4,30 @@ import { NavBar } from './Header'
 import { Footer } from './Footer'
 import Products from './Components/Products/Products'
 import { Provider } from 'react-redux';
-import store from './Redux/Store/Index';
+// import store from './Redux/Store/Index';
+import {createStore} from 'redux'
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import Cart from './Cart'
+import ProductDetail from './ProductDetail'
+import reducers from './Reducers'
 
-
+const store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 class App extends Component {
   render() {
 
     return (
-      <>
-      <Provider store={store()}>
+      <Router>
+      <Provider store={store}>
       <NavBar/>
-      <Products />
+      <Switch>
+      <Route  path="/" exact component={Products}/>
+      <Route  path="/cart" exact component={Cart}/>
+      <Route path='/products/:id' component={ProductDetail} />
+      </Switch>
       <Footer/>
       </Provider>
-      </>
+      </Router>
     );
   }
 }

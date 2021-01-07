@@ -1,17 +1,18 @@
-import React, { Component } from 'react'
-import './index.css'
+import React, { Component } from "react";
+import "./index.css";
+
+const footer = {
+    position: "bottom",
+  }
 
 export class Footer extends Component {
-    render() {
-        return (
-            <div className='container'>
-            <footer className="bg-light text-center text-lg-start">
-                <p className='row'>
-                    Fancy Products
-                </p>
-            </footer>
-            </div>
-
-        )
-    }
+  render() {
+    return (
+      <footer style={{footer}} className="bg-secondary text-center text-lg-start border border-dark">
+        <p className="text-center">
+          Fancy Products LLC 2021 All rights reserved
+        </p>
+      </footer>
+    );
+  }
 }

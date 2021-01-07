@@ -1,6 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { productsFetchData } from "../../Redux/Actions/Index";
+import React, { useEffect, useState } from "react";
 import PopulateProducts from "./Product";
 import { Link } from "react-router-dom";
 
@@ -64,47 +62,16 @@ function Products() {
   };
   return (
     <>
+      <div className="container text-center h-100">
+      <h2 className='align-content-center'>Welcome to Fancy Products LLC!</h2>
+      <p>Our products are the highest quality.</p>
       <FilteredProducts />
+      <div className='row row-cols-3 justify-content-center'>
       {productList()}
+      </div>
+      </div>
     </>
   );
 }
-
-// class Products extends Component {
-//   componentDidMount() {
-//     this.props.fetchData(
-//       "https://my-json-server.typicode.com/tdmichaelis/json-api/products"
-//     );
-//   }
-//   render() {
-//     const productsToRender = this.props.products;
-//     let productList = () => {
-//       if (productsToRender.length) {
-//         return productsToRender.map((product) => {
-//           return <PopulateProducts key={product.id} product={product} />;
-//         });
-//       } else {
-//         return "LOADING...";
-//       }
-//     };
-//     return productList();
-//   }
-// }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     products: state.products,
-//     hasErrored: state.productsHasErrored,
-//     isLoading: state.productsIsLoading,
-//   };
-// };
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     fetchData: (url) => dispatch(productsFetchData(url)),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Products);
 
 export default Products;

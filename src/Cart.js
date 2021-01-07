@@ -21,16 +21,16 @@ function Cart() {
       },
     };
   };
-  const addProduct = (item, index) => {
-    return {
-      type: "ADD_ITEM",
-      payload: {
-        title: item.title,
-        price: item.price,
-        index: index,
-      },
-    };
-  };
+  // const addProduct = (item, index) => {
+  //   return {
+  //     type: "ADD_ITEM",
+  //     payload: {
+  //       title: item.title,
+  //       price: item.price,
+  //       index: index,
+  //     },
+  //   };
+  // };
 
   const displayProducts = productList.map((product, index) => (
     <div className="border border-dark" style={{ "max-width": "450px" }}>
@@ -43,7 +43,8 @@ function Cart() {
       />
       <div style={{ "max-width": "250px" }}>
         <div className="row" >
-          <button className="col-sm" onClick={dispatch(addProduct(product))}>
+          {/* <button className="col-sm" onClick={dispatch(addProduct(product))}> */}
+          <button className="col-sm">
             <BsArrowBarUp />
           </button>
           <p className="col-sm">{product.quantity}</p>

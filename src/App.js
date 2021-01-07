@@ -1,12 +1,11 @@
 import './App.css';
 import React, { Component } from 'react'
-import { NavBar } from './Header'
+import { NavBar } from './NavBar'
 import { Footer } from './Footer'
-import Products from './Components/Products/Products'
+import Products from './Products'
 import { Provider } from 'react-redux';
-// import store from './Redux/Store/Index';
 import {createStore} from 'redux'
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Cart from './Cart'
 import ProductDetail from './ProductDetail'
 import reducers from './Reducers'

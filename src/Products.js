@@ -4,9 +4,13 @@ import { Link } from "react-router-dom";
 
 function Products() {
   useEffect(() => {
-    getProducts();
+    getProducts()
   }, []);
 
+  const styleLinks = {
+    "textDecoration": "none",
+    "color": "#2B303A",
+  }
   const [products, setProducts] = useState([]);
   const [currentProducts, setCurrentProduct] = useState([]);
   const getProducts = async () => {
@@ -34,8 +38,8 @@ function Products() {
     if (productsToRender.length) {
       return productsToRender.map((product) => {
         return (
-          <Link to={`products/${product.id}`}>
-            <PopulateProducts key={product.id} product={product} />
+          <Link key={product.id} to={`products/${product.id}`} style={styleLinks}>
+            <PopulateProducts product={product} />
           </Link>
         );
       });
@@ -46,9 +50,11 @@ function Products() {
   const FilteredProducts = () => {
     return (
       <select
+        style={{"marginBottom": "20px"}}
         name="categories"
         onChange={(e) => onCategoryChange(e.target.value)}
       >
+        <option value="default">Select category</option>
         <option value="all">All Items</option>
         <option value="headphones">Headphones</option>
         <option value="phone">Phone</option>
@@ -63,7 +69,7 @@ function Products() {
   return (
     <>
       <div className="container text-center h-100">
-      <h2 className='align-content-center'>Welcome to Fancy Products LLC!</h2>
+      <h2 className='align-content-center' style={{"marginTop": "20px"}}>Welcome to Fancy Products LLC!</h2>
       <p>Our products are the highest quality.</p>
       <FilteredProducts />
       <div className='row row-cols-3 justify-content-center'>

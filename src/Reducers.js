@@ -26,9 +26,9 @@ const itemsList = (state = [], action) => {
       const itemInCart = state.find((i) => i.title === action.payload.title);
       if (itemInCart) {
         return state.map((i) => {
-          if(i.title === action.payload.title) {
-              i.quantity++
-             return i;
+          if (i.title === action.payload.title) {
+            i.quantity++;
+            return i;
           } else {
             return i;
           }
@@ -37,7 +37,25 @@ const itemsList = (state = [], action) => {
         return [...state, action.payload];
       }
     case "REMOVE_ITEM":
-      return state.filter((item) => item !== state[action.payload.index]);
+      if (state.length > 1) {
+        if (state[action.payload.index].quantity > 1) {
+          const newState = state;
+          newState[action.payload.index].quantity--;
+          return newState;
+        } else {
+          return state.filter(
+            (product) => product.title !== state[action.payload.index].title
+          );
+        }
+      } else if (state.length <= 1) {
+        if (state[0].quantity === 1) {
+          return [];
+        } else {
+          const newState = state;
+          newState[0].quantity--;
+          return newState;
+        }
+      }
     default:
       return state;
   }

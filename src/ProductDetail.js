@@ -7,11 +7,12 @@ function ProductDetail({ match }) {
   });
 
   const styleImages = {
-    "max-height": "200px",
+    "maxHeight": "250px",
+    "padding": "30px"
   };
   const styleProducts = {
-    height: "350px",
-    "margin": "20px",
+    "maxHeight": "600px",
+    "padding": "20px 30px",
   };
 
   const [product, setProducts] = useState([]);
@@ -22,7 +23,6 @@ function ProductDetail({ match }) {
     const product = await fetchProduct.json();
 
     setProducts(product);
-    console.log(product);
   };
 
   const dispatch = useDispatch();
@@ -38,13 +38,12 @@ function ProductDetail({ match }) {
       },
     };
   };
-  console.log(product);
   return (
     <div style={styleProducts}>
-      <h5>{product.title}</h5>
+      <h5 style={{"margin": "0px 25px"}}>{product.title}</h5>
       <img src={product.img} alt={product.title} style={styleImages} />
-      <p>{product.description}</p>
-      <p>${product.price}</p>
+      <p style={{"width": "450px"}}>Product Details: {product.description}</p>
+      <p>Price: ${product.price}</p>
       <button
         onClick={() => {
           dispatch(addItem(product));

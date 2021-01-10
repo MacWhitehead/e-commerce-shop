@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsArrowBarUp, BsArrowBarDown } from "react-icons/bs";
+
+const styleButtons = {
+  width: "40px",
+};
+const styleImages = {
+  "maxHeight": "250px",
+  padding: "30px",
+};
+const styleProducts = {
+  "maxHeight": "600px",
+  padding: "20px 30px",
+};
 
 function Cart() {
   const productList = useSelector((state) => state.itemsList);
   const totalPrice = useSelector((state) => state.itemsTotalPrice);
   const totalProducts = useSelector((state) => state.numberOfItems);
-
-  console.log(productList);
 
   const dispatch = useDispatch();
 
@@ -16,50 +26,42 @@ function Cart() {
       type: "REMOVE_ITEM",
       payload: {
         title: item.title,
+        img: item.img,
         price: item.price,
         index: index,
       },
     };
   };
-  // const addProduct = (item, index) => {
-  //   return {
-  //     type: "ADD_ITEM",
-  //     payload: {
-  //       title: item.title,
-  //       price: item.price,
-  //       index: index,
-  //     },
-  //   };
-  // };
+  const addProduct = (item) => {
+    return {
+      type: "ADD_ITEM",
+      payload: {
+        title: item.title,
+        img: item.img,
+        price: item.price,
+      },
+    };
+  };
 
   const displayProducts = productList.map((product, index) => (
-    <div className="border border-dark" style={{ "max-width": "450px" }}>
-      <h6>{product.title}</h6>
-      <p>${product.price}</p>
+    <div key={index} className="border border-dark" style={styleProducts}>
       <img
-        style={{ "max-height": "100px" }}
+        style={{ "maxHeight": "100px" }}
         src={product.img}
         alt={product.title}
       />
-      <div style={{ "max-width": "250px" }}>
-        <div className="row" >
-          {/* <button className="col-sm" onClick={dispatch(addProduct(product))}> */}
-          <button className="col-sm">
-            <BsArrowBarUp />
+      <h6>{product.title}</h6>
+      <p>${product.price}</p>
+      <div>
+        <div className="row">
+          <button className="col-sm-4" style={styleButtons} onClick={() => dispatch(addProduct(product))}>
+            <BsArrowBarUp/>
           </button>
-          <p className="col-sm">{product.quantity}</p>
-          <button className="col-sm">
+          <p style={styleButtons} className="col-sm-4 text-center">{product.quantity}</p>
+          <button className="col-sm-4" style={styleButtons} onClick={() => dispatch(removeProduct(product, index))}>
             <BsArrowBarDown />
           </button>
         </div>
-      </div>
-      <div>
-        <button
-          className="btn btn-danger border border-secondary"
-          onClick={() => dispatch(removeProduct(product, index))}
-        >
-          Delete Product
-        </button>
       </div>
     </div>
   ));
@@ -71,13 +73,9 @@ function Cart() {
           : `${totalProducts} Item${totalProducts > 1 ? "s" : ""} in cart`}
       </h1>
       <div>{displayProducts}</div>
-      <div>Your total is: ${totalPrice}</div>
+      <div>Your total is: ${totalPrice.toFixed(2)}</div>
     </div>
   );
 }
 
 export default Cart;
-
-//Local storage for cart and login?
-//Function to increment/decrement items in cart
-//Nav bar add in total items
